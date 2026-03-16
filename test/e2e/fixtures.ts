@@ -1,0 +1,73 @@
+import { mkdtempSync, mkdirSync, rmSync } from 'fs'
+import { join } from 'path'
+import { tmpdir } from 'os'
+import { test as base, expect } from '@playwright/test'
+import { _electron as electron, type ElectronApplication, type Page } from 'playwright'
+
+type E2EFixtures = {
+  electronApp: ElectronApplication
+  page: Page
+  testHomeDir: string
+  testBaseDir: string
+}
+
+export async function launchElectronApp(testHomeDir: string): Promise<ElectronApplication> {
+  return electron.launch({
+    args: [join(process.cwd(), 'dist-electron/main/index.js')],
+    env: {
+      ...process.env,
+      HOME: testHomeDir,
+      TMPDIR: join(testHomeDir, 'tmp'),
+      TEMP: join(testHomeDir, 'tmp'),
+      TMP: join(testHomeDir, 'tmp')
+    }
+  })
+}
+
+export function fixturePdfPath(name: string): string {
+  return join(process.cwd(), 'test', 'fixtures', 'pdfs', name)
+}
+
+export async function mockNextOpenDialogPath(electronApp: ElectronApplication, filePath: string): Promise<void> {
+  await electronApp.evaluate(async ({ dialog }, targetPath) => {
+    dialog.showOpenDialog = async () => ({
+      canceled: false,
+      filePaths: [targetPath]
+    })
+  }, filePath)
+}
+
+export const test = base.extend<E2EFixtures>({
+  testHomeDir: async ({}, use) => {
+    const testHomeDir = mkdtempSync(join(tmpdir(), 'toonshark-e2e-home-'))
+    mkdirSync(join(testHomeDir, 'tmp'), { recursive: true })
+    try {
+      await use(testHomeDir)
+    } finally {
+      rmSync(testHomeDir, { recursive: true, force: true })
+    }
+  },
+
+  testBaseDir: async ({ testHomeDir }, use) => {
+    const testBaseDir = join(testHomeDir, 'custom-base-dir')
+    await use(testBaseDir)
+  },
+
+  electronApp: async ({ testHomeDir }, use) => {
+    const electronApp = await launchElectronApp(testHomeDir)
+
+    try {
+      await use(electronApp)
+    } finally {
+      await electronApp.close()
+    }
+  },
+
+  page: async ({ electronApp }, use) => {
+    const page = await electronApp.firstWindow()
+    await page.waitForLoadState('domcontentloaded')
+    await use(page)
+  }
+})
+
+export { expect }

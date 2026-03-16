@@ -1,0 +1,56 @@
+[
+  {
+    "id": "iphone_16_pro",
+    "name": "iPhone 16 Pro / 15 / 14 / 13 Pro",
+    "cssViewportWidth": 393,
+    "cssViewportHeight": 852
+  },
+  {
+    "id": "iphone_16_pro_max",
+    "name": "iPhone 16 Pro Max / 15 Pro Max",
+    "cssViewportWidth": 393,
+    "cssViewportHeight": 852
+  },
+  {
+    "id": "iphone_14_pro",
+    "name": "iPhone 14 Pro / 12 Pro / 13",
+    "cssViewportWidth": 390,
+    "cssViewportHeight": 844
+  },
+  {
+    "id": "iphone_14_plus",
+    "name": "iPhone 14 Plus / 13 Pro Max",
+    "cssViewportWidth": 428,
+    "cssViewportHeight": 926
+  },
+  {
+    "id": "iphone_se_3",
+    "name": "iPhone SE (3rd Gen) / 8",
+    "cssViewportWidth": 375,
+    "cssViewportHeight": 667
+  },
+  {
+    "id": "galaxy_s25",
+    "name": "Samsung Galaxy S25 / S24",
+    "cssViewportWidth": 393,
+    "cssViewportHeight": 852
+  },
+  {
+    "id": "galaxy_s25_ultra",
+    "name": "Samsung Galaxy S25 Ultra / S24 Ultra",
+    "cssViewportWidth": 412,
+    "cssViewportHeight": 915
+  },
+  {
+    "id": "standard_android",
+    "name": "Standard Android (General)",
+    "cssViewportWidth": 360,
+    "cssViewportHeight": 800
+  },
+  {
+    "id": "galaxy_z_fold_cover",
+    "name": "Galaxy Z Fold 6/5 (Cover)",
+    "cssViewportWidth": 375,
+    "cssViewportHeight": 832
+  }
+]

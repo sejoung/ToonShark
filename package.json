@@ -1,0 +1,113 @@
+{
+  "name": "toonshark",
+  "version": "0.1.0",
+  "description": "Electron-based PDF webtoon image splitter and preview tool",
+  "main": "dist-electron/main/index.js",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e:prepare": "node scripts/generate-e2e-fixtures.mjs",
+    "test:e2e": "npm run test:e2e:prepare && npm run build && playwright test",
+    "test:e2e:headed": "npm run test:e2e:prepare && npm run build && playwright test --headed",
+    "pack": "electron-vite build && electron-builder --dir",
+    "dist": "electron-vite build && electron-builder",
+    "dist:mac": "electron-vite build && electron-builder --mac",
+    "dist:win": "electron-vite build && electron-builder --win",
+    "dist:linux": "electron-vite build && electron-builder --linux"
+  },
+  "build": {
+    "appId": "com.toonshark.app",
+    "productName": "ToonShark",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist-electron/**/*",
+      "node_modules/**/*",
+      "!node_modules/**/*.{md,ts,map}",
+      "!node_modules/**/test/**",
+      "!node_modules/**/docs/**"
+    ],
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "category": "public.app-category.graphics-design"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "category": "Graphics"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "asarUnpack": [
+      "node_modules/sharp/**",
+      "node_modules/@napi-rs/canvas/**"
+    ],
+    "extraResources": [
+      {
+        "from": "resources/defaults",
+        "to": "defaults"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^25.4.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.4",
+    "electron": "^41.0.0",
+    "electron-builder": "^26.8.1",
+    "electron-vite": "^5.0.0",
+    "jsdom": "^28.1.0",
+    "playwright": "^1.58.2",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^4.2.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vitest": "^4.0.18"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.96",
+    "@tailwindcss/postcss": "^4.2.1",
+    "pdfjs-dist": "^5.5.207",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-router-dom": "^7.13.1",
+    "sharp": "^0.34.5",
+    "uuid": "^13.0.0",
+    "zustand": "^5.0.11"
+  }
+}

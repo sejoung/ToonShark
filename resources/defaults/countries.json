@@ -1,0 +1,50 @@
+[
+    {
+        "id": "kr",
+        "platforms": [
+            {
+                "id": "ridi",
+              "episode": {
+                "width": 720,
+                "format": "jpg",
+                "maxFileSizeMB": 100
+              },
+              "thumbnail": {
+                "width": 360,
+                "height": 522,
+                "format": "jpg",
+                "maxFileSizeMB": 2
+              }
+            },
+            {
+                "id": "alltoon",
+              "episode": {
+                "width": 760,
+                "format": "png",
+                "maxFileSizeMB": null
+              },
+              "thumbnail": {
+                "width": 720,
+                "height": 972,
+                "format": "png",
+                "maxFileSizeMB": null
+              }
+
+            },
+            {
+                "id": "watcha",
+              "episode": {
+                "width": 1080,
+                "format": "jpg",
+                "maxFileSizeMB": null
+              },
+              "thumbnail": {
+                "width": 1080,
+                "height": 608,
+                "format": "jpg",
+                "maxFileSizeMB": null
+              }
+            }
+        ]
+    }
+]
