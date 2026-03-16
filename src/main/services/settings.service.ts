@@ -6,7 +6,7 @@ import type { AppSettings, DevicePreset, Country } from '@shared/types'
 import { DEFAULT_SETTINGS } from '@shared/constants'
 import type { Logger } from './logger.service'
 
-const DEFAULT_BASE_DIR = join(homedir(), 'toonshark_data')
+const DEFAULT_BASE_DIR = join(process.env.TOONSHARK_HOME || homedir(), 'toonshark_data')
 function resolveDefaultsDir(): string {
   // Production: process.resourcesPath/defaults/
   // Development: project root resources/defaults/

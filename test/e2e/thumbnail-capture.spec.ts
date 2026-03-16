@@ -83,7 +83,7 @@ test('captures thumbnail and shows folder button that persists after navigation'
   expect(thumbnailFiles.length).toBeGreaterThan(0)
 
   // Navigate back to job detail and return — folder button should persist
-  await page.getByRole('button', { name: /^Back$|^뒤로$/ }).click()
+  await page.getByRole('button', { name: /Back|뒤로/ }).click()
   await expect(page).toHaveURL(/\/job\/[^/]+$/)
 
   // Go back to slice detail

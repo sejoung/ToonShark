@@ -21,7 +21,7 @@ async function ensureEnglish(page: import('playwright').Page) {
   await languageSelect.selectOption('en')
   await clickSaveButton(page)
   await expect(page.getByText(/Saved!|저장 완료!/)).toBeVisible({ timeout: 5_000 })
-  await page.getByRole('button', { name: /^Back$|^뒤로$/ }).click()
+  await page.getByRole('button', { name: /Back|뒤로/ }).click()
   await expect(page.getByRole('heading', { name: 'ToonShark' })).toBeVisible()
 }
 
@@ -44,7 +44,7 @@ test('switches language to Korean and UI updates', async ({ page }) => {
   await expect(page.getByText(/Saved!|저장 완료!/)).toBeVisible({ timeout: 5_000 })
 
   // 뒤로가기
-  await page.getByRole('button', { name: /^Back$|^뒤로$/ }).click()
+  await page.getByRole('button', { name: /Back|뒤로/ }).click()
 
   // 홈 화면이 한국어로 표시되는지 확인
   await expect(page.getByRole('heading', { name: 'ToonShark' })).toBeVisible()
@@ -73,7 +73,7 @@ test('switches language to Korean and back to English', async ({ page }) => {
   await expect(page.getByText(/Saved!|저장 완료!/)).toBeVisible({ timeout: 5_000 })
 
   // 뒤로가기
-  await page.getByRole('button', { name: /^Back$|^뒤로$/ }).click()
+  await page.getByRole('button', { name: /Back|뒤로/ }).click()
 
   // 홈 화면이 영어로 표시되는지 확인
   await expect(page.getByRole('heading', { name: 'ToonShark' })).toBeVisible()
@@ -90,7 +90,7 @@ test('Korean locale persists across settings page reload', async ({ page }) => {
   await expect(page.getByText(/Saved!|저장 완료!/)).toBeVisible({ timeout: 5_000 })
 
   // 홈으로 이동 후 다시 설정 진입
-  await page.getByRole('button', { name: /^Back$|^뒤로$/ }).click()
+  await page.getByRole('button', { name: /Back|뒤로/ }).click()
   await expect(page.getByRole('heading', { name: 'ToonShark' })).toBeVisible()
 
   await page.getByRole('button', { name: '설정' }).click()

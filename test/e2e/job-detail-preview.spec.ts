@@ -77,7 +77,7 @@ test('navigates to slice detail from job detail thumbnails', async ({ electronAp
   await expect(page).toHaveURL(/\/job\/.+\/slice\?index=/)
 
   // 네비게이션 버튼 확인
-  await expect(page.getByRole('button', { name: /^Back$|^뒤로$/ })).toBeVisible()
+  await expect(page.getByRole('button', { name: /Back|뒤로/ })).toBeVisible()
   await expect(page.getByRole('button', { name: /^Next$|^다음$/ })).toBeVisible()
 })
 

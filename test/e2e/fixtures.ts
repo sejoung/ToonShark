@@ -12,14 +12,14 @@ type E2EFixtures = {
 }
 
 export async function launchElectronApp(testHomeDir: string): Promise<ElectronApplication> {
+  // Windows: USERPROFILE을 바꾸면 Electron이 APPDATA를 못 찾아서 크래시함
+  // 대신 TOONSHARK_HOME을 사용하여 앱 데이터만 격리
   return electron.launch({
     args: [join(process.cwd(), 'dist-electron/main/index.js')],
     env: {
       ...process.env,
-      // Unix
       HOME: testHomeDir,
-      // Windows — USERPROFILE is what Node's os.homedir() reads
-      USERPROFILE: testHomeDir,
+      TOONSHARK_HOME: testHomeDir,
       TMPDIR: join(testHomeDir, 'tmp'),
       TEMP: join(testHomeDir, 'tmp'),
       TMP: join(testHomeDir, 'tmp')

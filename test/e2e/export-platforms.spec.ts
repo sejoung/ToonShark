@@ -81,7 +81,7 @@ test('re-export shows already exported badges', async ({ electronApp, page, test
   await expect(page.getByRole('button', { name: /^Open Export Folder$|^내보내기 폴더 열기$/ }).first()).toBeVisible({ timeout: 30_000 })
 
   // 뒤로 갔다가 다시 내보내기 페이지 진입
-  await page.getByRole('button', { name: /^Back$|^뒤로$/ }).click()
+  await page.getByRole('button', { name: /Back|뒤로/ }).click()
   await page.getByRole('button', { name: /^Episode Export$|^에피소드 내보내기$/ }).first().click()
   await expect(page).toHaveURL(/\/job\/.+\/export$/)
 
