@@ -9,8 +9,34 @@ permissions:
   contents: write
 
 jobs:
+  typecheck:
+    name: Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx tsc --noEmit
+
+  unit-test:
+    name: Unit Tests
+    needs: typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+
   build:
     name: Build (${{ matrix.os }})
+    needs: unit-test
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false

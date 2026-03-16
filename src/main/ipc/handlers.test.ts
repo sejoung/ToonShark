@@ -247,7 +247,7 @@ describe('registerIpcHandlers', () => {
     let release!: () => void
 
     services.jobExecutionService.execute = vi.fn(
-      () => new Promise((resolve) => {
+      () => new Promise<JobMeta>((resolve) => {
         release = () => resolve({
           id: 'job-1',
           title: 'test',

@@ -124,7 +124,7 @@ describe('HomePage', () => {
     ;(window.api.getRecentJobs as ReturnType<typeof vi.fn>).mockResolvedValue([recentJob])
     storageInfo = {
       totalSize: 1234,
-      pdfs: [{ sourcePdfPath: '/books/episode1.pdf', size: 1234, jobs: [{ jobId: 'job-1', size: 512 }] }]
+      pdfs: [{ sourcePdfPath: '/books/episode1.pdf', name: 'episode1', size: 1234, jobs: [{ jobId: 'job-1', title: 'episode1', createdAt: '2026-01-01T00:00:00Z', size: 512 }] }]
     }
 
     const user = userEvent.setup()
