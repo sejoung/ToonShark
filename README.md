@@ -52,7 +52,8 @@ Pre-built installers are available on the [Releases](https://github.com/realdraw
 
 | OS | Format |
 |----|--------|
-| macOS (Apple Silicon & Intel) | `.dmg` |
+| macOS (Apple Silicon) | `.dmg` (arm64) |
+| macOS (Intel) | `.dmg` (x64) |
 | Windows x64 | `.exe` (NSIS installer) |
 
 ## Build from Source
