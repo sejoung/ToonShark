@@ -44,7 +44,15 @@ export const test = base.extend<E2EFixtures>({
     try {
       await use(testHomeDir)
     } finally {
-      rmSync(testHomeDir, { recursive: true, force: true })
+      // Windows: files may still be locked briefly after Electron closes
+      for (let i = 0; i < 5; i++) {
+        try {
+          rmSync(testHomeDir, { recursive: true, force: true })
+          break
+        } catch {
+          await new Promise((r) => setTimeout(r, 500))
+        }
+      }
     }
   },
 
@@ -66,6 +74,8 @@ export const test = base.extend<E2EFixtures>({
   page: async ({ electronApp }, use) => {
     const page = await electronApp.firstWindow()
     await page.waitForLoadState('domcontentloaded')
+    // Wait for the app to fully render before handing page to tests
+    await page.getByRole('heading', { name: 'ToonShark' }).waitFor({ timeout: 15000 })
     await use(page)
   }
 })

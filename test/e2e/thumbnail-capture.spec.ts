@@ -76,7 +76,7 @@ test('captures thumbnail and shows folder button that persists after navigation'
   await expect(page.getByText('Thumbnail saved')).toBeVisible({ timeout: 5000 })
 
   // Folder button should appear (with title "Open Folder")
-  await expect(page.locator('button[title="Open Folder"]')).toBeVisible()
+  await expect(page.locator('button[title="Open Folder"], button[title="폴더 열기"]')).toBeVisible()
 
   // Verify thumbnail file was created on disk
   const thumbnailFiles = findThumbnailFiles(testBaseDir)
