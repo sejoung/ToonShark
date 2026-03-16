@@ -118,6 +118,11 @@ Each platform defines:
 - **Episode spec** — target width, image format (png/jpg), max file size
 - **Thumbnail spec** (optional) — width, height, format, max file size
 
+## Documentation
+
+- [User Manual (English)](docs/manual_en.md)
+- [사용 매뉴얼 (한국어)](docs/manual_ko.md)
+
 ## Contributing
 
 Contributions are welcome! Feel free to open issues or submit pull requests.

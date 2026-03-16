@@ -118,6 +118,11 @@ resources/
 - **에피소드 스펙** — 목표 너비, 이미지 포맷 (png/jpg), 최대 파일 크기
 - **썸네일 스펙** (선택) — 너비, 높이, 포맷, 최대 파일 크기
 
+## 문서
+
+- [User Manual (English)](docs/manual_en.md)
+- [사용 매뉴얼 (한국어)](docs/manual_ko.md)
+
 ## 기여
 
 기여를 환영합니다! 이슈를 등록하거나 Pull Request를 제출해 주세요.
