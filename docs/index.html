@@ -437,6 +437,52 @@
       background: var(--accent-dim);
     }
 
+    /* Notice */
+    .notice-section {
+      padding: 0 0 24px;
+      animation: fadeInUp 0.6s ease 0.35s both;
+    }
+
+    .notice-card {
+      background: rgba(255, 200, 50, 0.06);
+      border: 1px solid rgba(255, 200, 50, 0.15);
+      border-radius: 12px;
+      padding: 18px 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .notice-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      color: #f0c040;
+      margin-top: 2px;
+    }
+
+    .notice-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .notice-title {
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: #f0c040;
+      margin-bottom: 4px;
+    }
+
+    .notice-body {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.55;
+    }
+
+    .notice-body strong {
+      color: var(--text);
+    }
+
     /* Docs Section */
     .docs-section {
       padding: 0 0 64px;
@@ -621,6 +667,18 @@
     </div>
   </section>
 
+  <section class="notice-section" id="osNotice" style="display:none">
+    <div class="notice-card">
+      <div class="notice-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <div>
+        <div class="notice-title" id="osNoticeTitle"></div>
+        <div class="notice-body" id="osNoticeBody"></div>
+      </div>
+    </div>
+  </section>
+
   <section class="docs-section">
     <div class="section-label" id="docsTitle">Documentation</div>
     <div class="docs-grid" id="docsGrid"></div>
@@ -668,6 +726,10 @@ const i18n = {
     footerReleases: 'All releases',
     download: 'Download',
     version: 'Version',
+    macNoticeTitle: 'macOS Security Notice',
+    macNoticeBody: 'ToonShark is not signed with an Apple Developer certificate, so macOS may block it on first launch.<br><strong>1.</strong> Right-click the app and select <strong>Open</strong>, then click <strong>Open</strong> again.<br><strong>2.</strong> If still blocked, go to <strong>System Settings &gt; Privacy &amp; Security</strong>, scroll down and click <strong>Open Anyway</strong> next to the ToonShark message.<br>This is only required once.',
+    winNoticeTitle: 'Windows SmartScreen Notice',
+    winNoticeBody: 'When you run ToonShark for the first time, Windows SmartScreen may show a warning. Click <strong>More info</strong>, then click <strong>Run anyway</strong> to proceed. This only appears on the first launch.',
     docTitle: 'User Manual',
     docDesc: 'How to use ToonShark',
     docUrl: 'https://github.com/realdraw/ToonShark/blob/main/docs/manual_en.md',
@@ -690,6 +752,10 @@ const i18n = {
     footerReleases: '전체 릴리즈',
     download: '다운로드',
     version: '버전',
+    macNoticeTitle: 'macOS 보안 안내',
+    macNoticeBody: 'ToonShark은 Apple 개발자 인증서로 서명되지 않아 처음 실행 시 macOS가 차단할 수 있습니다.<br><strong>1.</strong> 앱을 <strong>우클릭</strong> &gt; <strong>열기</strong>를 선택한 후 다시 <strong>열기</strong>를 클릭하세요.<br><strong>2.</strong> 그래도 안 되면 <strong>시스템 설정 &gt; 개인정보 보호 및 보안</strong>에서 ToonShark 옆의 <strong>확인 없이 열기</strong>를 클릭하세요.<br>최초 1회만 필요합니다.',
+    winNoticeTitle: 'Windows SmartScreen 안내',
+    winNoticeBody: '처음 실행 시 Windows SmartScreen 경고가 나타날 수 있습니다. <strong>추가 정보</strong>를 클릭한 후 <strong>실행</strong>을 누르면 됩니다. 최초 1회만 표시됩니다.',
     docTitle: '사용 설명서',
     docDesc: 'ToonShark 사용법',
     docUrl: 'https://github.com/realdraw/ToonShark/blob/main/docs/manual_ko.md',
@@ -839,6 +905,20 @@ function updateUI() {
       </div>
     </a>
   `;
+
+  const ua = navigator.userAgent;
+  const osNotice = document.getElementById('osNotice');
+  if (ua.includes('Mac')) {
+    osNotice.style.display = '';
+    document.getElementById('osNoticeTitle').textContent = t('macNoticeTitle');
+    document.getElementById('osNoticeBody').innerHTML = t('macNoticeBody');
+  } else if (ua.includes('Win')) {
+    osNotice.style.display = '';
+    document.getElementById('osNoticeTitle').textContent = t('winNoticeTitle');
+    document.getElementById('osNoticeBody').innerHTML = t('winNoticeBody');
+  } else {
+    osNotice.style.display = 'none';
+  }
 
   if (releaseData) renderDownloads();
 }
