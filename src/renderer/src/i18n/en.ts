@@ -378,7 +378,10 @@ const en: TranslationKeys = {
   },
   platformName: (id: string) => {
     const names: Record<string, string> = {
-      ridi: 'Ridi', alltoon: 'Alltoon', watcha: 'WATCHA'
+      ridi: 'Ridi', alltoon: 'Alltoon', watcha: 'WATCHA',
+      onestore: 'ONE Store', mrblue: 'Mr.Blue', kakaopage: 'KakaoPage',
+      bomtoon: 'Bomtoon', lezhin: 'Lezhin Comics', naverseries: 'Naver Series',
+      oreum: 'Oreum Media', bookpal: 'Bookpal'
     }
     return names[id] ?? id
   },
