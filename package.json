@@ -1,6 +1,6 @@
 {
   "name": "toonshark",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Electron-based PDF webtoon image splitter and preview tool",
   "main": "dist-electron/main/index.js",
   "scripts": {
