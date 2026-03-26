@@ -111,13 +111,13 @@
             {
                 "id": "naverseries",
                 "episode": {
-                    "width": 720,
+                    "width": 1000,
                     "format": "jpg",
-                    "maxFileSizeMB": null
+                    "maxFileSizeMB": 50
                 },
                 "thumbnail": {
                     "width": 300,
-                    "height": 400,
+                    "height": 430,
                     "format": "jpg",
                     "maxFileSizeMB": null
                 }
